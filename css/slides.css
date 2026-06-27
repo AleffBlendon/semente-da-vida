@@ -1,0 +1,456 @@
+/* ============================================================
+   SEMENTE DA VIDA — Tela de Slides (slides.css)
+   Visualizador · Header escuro · Progresso · Controles
+   ============================================================ */
+
+/* ── 1. Layout geral da página ────────────────────────────── */
+.page-slides {
+  background: #0f0f0f;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+/* ── 2. Header (modo slides – fundo escuro) ───────────────── */
+
+/* Override do header base para o tema escuro */
+.header--slides {
+  background: #1c1c1c !important;
+  box-shadow: 0 2px 16px rgba(0,0,0,.5) !important;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  height: 72px;
+}
+
+.header--slides .header__logo {
+  height: 44px;
+  opacity: .9;
+  filter: brightness(0) invert(1);
+}
+
+/* Info central: faixa · módulo */
+.slides-header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .92rem;
+  font-weight: 700;
+}
+.slides-header-faixa {
+  color: var(--yellow, #ffd166);
+  letter-spacing: .03em;
+}
+.slides-header-sep {
+  color: rgba(255,255,255,.3);
+  font-size: 1.1rem;
+}
+.slides-header-modulo {
+  color: rgba(255,255,255,.75);
+}
+
+/* Botão de voltar no header */
+.slides-back-btn {
+  color: rgba(255,255,255,.75) !important;
+  border-color: rgba(255,255,255,.2) !important;
+  background: transparent !important;
+  font-size: .9rem !important;
+  padding: 9px 20px !important;
+  min-height: 40px !important;
+}
+.slides-back-btn:hover {
+  color: #fff !important;
+  border-color: rgba(255,255,255,.5) !important;
+  background: rgba(255,255,255,.08) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ── 3. Barra de progresso ────────────────────────────────── */
+.slides-progress-wrap {
+  height: 5px;
+  background: rgba(255,255,255,.08);
+  flex-shrink: 0;
+}
+.slides-progress-bar {
+  height: 100%;
+  background: var(--wine, #8B1E2D);
+  width: 0%;
+  transition: width .4s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* ── 4. Área principal ────────────────────────────────────── */
+.slides-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px 40px;
+}
+
+/* ── 5. Estado: carregando ────────────────────────────────── */
+/* [hidden] precisa sobrescrever o display:flex declarado abaixo */
+[hidden] { display: none !important; }
+
+.slides-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  color: rgba(255,255,255,.55);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.slides-loading__spinner {
+  width: 52px;
+  height: 52px;
+  border: 4px solid rgba(255,255,255,.1);
+  border-top-color: var(--wine, #8B1E2D);
+  border-radius: 50%;
+  animation: spin .75s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── 6. Estado: vazio / sem slides ───────────────────────── */
+.slides-empty {
+  text-align: center;
+  color: rgba(255,255,255,.7);
+  max-width: 460px;
+  padding: 48px 28px;
+}
+.slides-empty__icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  line-height: 1;
+}
+.slides-empty__title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: -.01em;
+}
+.slides-empty__desc {
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 32px;
+  color: rgba(255,255,255,.6);
+}
+.slides-empty__desc code {
+  display: inline-block;
+  margin-top: 8px;
+  background: rgba(255,255,255,.1);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-family: monospace;
+  font-size: .88rem;
+  color: var(--yellow, #ffd166);
+  word-break: break-all;
+}
+
+/* ── 7. Viewer (container do slide + controles) ──────────── */
+.slides-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 1040px;
+}
+
+/* ── 8. Imagem do slide ───────────────────────────────────── */
+.slide-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: var(--radius, 16px);
+  overflow: hidden;
+  box-shadow: 0 16px 64px rgba(0,0,0,.7), 0 4px 16px rgba(0,0,0,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ── 9. Animações de transição de slide ──────────────────── */
+.slide-exit-left {
+  animation: exitLeft .22s ease forwards;
+}
+.slide-exit-right {
+  animation: exitRight .22s ease forwards;
+}
+.slide-enter-left {
+  animation: enterLeft .22s ease forwards;
+}
+.slide-enter-right {
+  animation: enterRight .22s ease forwards;
+}
+
+@keyframes exitLeft  { to   { opacity: 0; transform: translateX(-36px); } }
+@keyframes exitRight { to   { opacity: 0; transform: translateX( 36px); } }
+@keyframes enterLeft  { from { opacity: 0; transform: translateX(-36px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes enterRight { from { opacity: 0; transform: translateX( 36px); } to { opacity: 1; transform: translateX(0); } }
+
+/* ── 10. Setas laterais ───────────────────────────────────── */
+/* Visíveis permanentemente no desktop (opacity .7), lift no hover */
+.slide-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.5);
+  border: 2px solid rgba(255,255,255,.18);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: .7;                        /* sempre visíveis */
+  transition: opacity .2s ease, background .2s ease, transform .2s ease, border-color .2s ease;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+}
+.slide-arrow:hover {
+  opacity: 1;
+  background: rgba(0,0,0,.78);
+  border-color: rgba(255,255,255,.45);
+  transform: translateY(-50%) scale(1.08);
+}
+.slide-arrow:disabled {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.slide-arrow--prev { left: 16px; }
+.slide-arrow--next { right: 16px; }
+
+/* ── 11. Controles inferiores ─────────────────────────────── */
+.slides-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+  padding: 8px 4px;
+}
+
+/* Contador "X de Y" */
+.slides-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 50px;
+  padding: 14px 32px;
+  min-width: 130px;
+  justify-content: center;
+  letter-spacing: .02em;
+}
+.slides-counter__sep {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: .55;
+}
+
+/* ── 12. Dots de navegação ────────────────────────────────── */
+.slides-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-height: 24px;
+}
+.slides-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.22);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background .2s ease, transform .2s ease;
+  flex-shrink: 0;
+}
+.slides-dot:hover {
+  background: rgba(255,255,255,.55);
+  transform: scale(1.25);
+}
+.slides-dot--active {
+  background: var(--wine, #8B1E2D) !important;
+  transform: scale(1.35);
+  box-shadow: 0 0 0 3px rgba(139,30,45,.4);
+}
+
+/* ── 13. Overrides de botões para fundo escuro ────────────── */
+.page-slides .btn--secondary {
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.22);
+  color: #fff;
+  min-height: 56px;
+}
+.page-slides .btn--secondary:hover {
+  background: rgba(255,255,255,.2);
+  border-color: rgba(255,255,255,.45);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.page-slides .btn--secondary:disabled {
+  opacity: .3;
+  pointer-events: none;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.page-slides .btn--primary {
+  background: var(--wine, #8B1E2D);
+  border-color: var(--wine, #8B1E2D);
+  color: #fff;
+  min-height: 56px;
+}
+.page-slides .btn--primary:hover {
+  background: var(--wine-light, #b02438);
+  border-color: var(--wine-light, #b02438);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139,30,45,.45);
+}
+
+.page-slides .btn--ghost {
+  background: transparent;
+  border-color: rgba(255,255,255,.22);
+  color: rgba(255,255,255,.8);
+}
+.page-slides .btn--ghost:hover {
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.4);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ── 14. Modal de conclusão ───────────────────────────────── */
+.page-slides .modal-overlay {
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(8px);
+}
+.page-slides .modal__icon  { font-size: 5rem; }
+.page-slides .modal__title { font-size: 2.4rem; }
+
+/* ── 15. Responsivo 768px ─────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Header: oculta info central no mobile */
+  .slides-header-info { display: none; }
+
+  .header--slides { height: 64px; }
+  .header--slides .header__logo { height: 38px; }
+
+  /* Área principal */
+  .slides-main { padding: 14px 10px 28px; }
+
+  /* Imagem */
+  .slide-image-wrap { border-radius: 10px; }
+
+  /* Controles */
+  .slides-controls { gap: 12px; padding: 4px 0; }
+  .slides-counter  { font-size: 1.05rem; padding: 11px 20px; min-width: 100px; }
+
+  /* Setas: ocultas no mobile (usa swipe) */
+  .slide-arrow { display: none; }
+
+  /* Botões */
+  .page-slides .btn--secondary,
+  .page-slides .btn--primary {
+    padding: 11px 18px !important;
+    font-size: .95rem !important;
+    min-height: 48px !important;
+  }
+}
+
+/* ── 16. Responsivo 480px ─────────────────────────────────── */
+@media (max-width: 480px) {
+
+  .slides-main { padding: 10px 8px 20px; }
+
+  .slides-viewer { gap: 16px; }
+
+  .slide-image-wrap { border-radius: 8px; }
+
+  .slides-counter {
+    font-size: .95rem;
+    padding: 10px 16px;
+    min-width: 88px;
+  }
+  .slides-counter__sep { font-size: .85rem; }
+
+  .slides-dots .slides-dot { width: 9px; height: 9px; }
+
+  .page-slides .btn--secondary,
+  .page-slides .btn--primary {
+    padding: 10px 14px !important;
+    font-size: .88rem !important;
+  }
+}
+
+/* ── 17. Landscape mobile / tela muito curta ──────────────── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .slides-main   { padding: 8px; }
+  .slides-viewer { gap: 10px; }
+  .slides-dots   { display: none; }
+}
+
+/* ── Transição de opacidade durante troca de slide ── */
+/* Aplicado via JS: image.style.opacity = '0' / '1'   */
+.slide-image {
+  transition: opacity .18s ease;
+}
+
+/* Spinner sobreposto ao image-wrap durante carregamento de slide */
+.slide-image-wrap.is-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.35);
+  border-radius: inherit;
+  /* Spinner centralizado via pseudo-elemento */
+  background-image: none;
+}
+/* Spinner real usando um segundo pseudo-elemento não é possível,
+   então usamos box-shadow no ::before para criar o anel giratório */
+.slide-image-wrap.is-loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border: 4px solid rgba(255,255,255,.15);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: slideImgSpin .7s linear infinite;
+  z-index: 5;
+  pointer-events: none;
+}
+@keyframes slideImgSpin {
+  to { transform: rotate(360deg); }
+}

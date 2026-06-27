@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slides — Semente da Vida</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/slides.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body class="page-slides">
+
+  <!-- ===== HEADER ===== -->
+  <header class="header header--slides" id="slidesHeader">
+    <div class="container header__inner">
+
+      <!-- Logo / voltar aos módulos -->
+      <a href="#" class="header__logo-link" id="btnVoltar" title="Voltar aos módulos">
+        <img src="image/logo.png" alt="Instituto Semente da Vida" class="header__logo" />
+      </a>
+
+      <!-- Info do módulo atual -->
+      <div class="slides-header-info">
+        <span class="slides-header-faixa" id="headerFaixa">—</span>
+        <span class="slides-header-sep">·</span>
+        <span class="slides-header-modulo" id="headerModulo">—</span>
+      </div>
+
+      <!-- Botão voltar visível no header -->
+      <a href="#" class="btn btn--ghost slides-back-btn" id="btnVoltarTop">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Módulos
+      </a>
+
+    </div>
+  </header>
+
+  <!-- ===== BARRA DE PROGRESSO ===== -->
+  <div class="slides-progress-wrap" role="progressbar" aria-label="Progresso dos slides">
+    <div class="slides-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- ===== ÁREA PRINCIPAL ===== -->
+  <main class="slides-main" id="slidesMain">
+
+    <!-- Estado: carregando -->
+    <div class="slides-loading" id="slidesLoading" aria-live="polite">
+      <div class="slides-loading__spinner"></div>
+      <p>Carregando slides…</p>
+    </div>
+
+    <!-- Estado: erro / sem slides -->
+    <div class="slides-empty" id="slidesEmpty" hidden>
+      <div class="slides-empty__icon">📂</div>
+      <h2 class="slides-empty__title">Nenhum slide encontrado</h2>
+      <p class="slides-empty__desc">
+        Adicione imagens JPG na pasta do módulo:<br />
+        <code id="slidesEmptyPath"></code>
+      </p>
+      <a href="#" class="btn btn--primary" id="slidesEmptyBack">← Voltar aos módulos</a>
+    </div>
+
+    <!-- Visualizador de slides -->
+    <div class="slides-viewer" id="slidesViewer" hidden>
+
+      <!-- Imagem do slide atual -->
+      <div class="slide-image-wrap" id="slideImageWrap">
+        <img
+          src=""
+          alt="Slide"
+          class="slide-image"
+          id="slideImage"
+          draggable="false"
+        />
+
+        <!-- Setas laterais (desktop) -->
+        <button class="slide-arrow slide-arrow--prev" id="arrowPrev" aria-label="Slide anterior">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <button class="slide-arrow slide-arrow--next" id="arrowNext" aria-label="Próximo slide">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Controles inferiores -->
+      <div class="slides-controls">
+
+        <button class="btn btn--secondary" id="btnPrev" disabled>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Voltar
+        </button>
+
+        <div class="slides-counter" id="slidesCounter" aria-live="polite">
+          <span id="slideAtual">1</span>
+          <span class="slides-counter__sep">de</span>
+          <span id="slideTotal">1</span>
+        </div>
+
+        <button class="btn btn--primary" id="btnNext">
+          Próximo
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+
+      </div>
+
+      <!-- Miniaturas (dots) -->
+      <div class="slides-dots" id="slidesDots" aria-label="Navegação por slides"></div>
+
+    </div>
+
+  </main>
+
+  <!-- ===== MODAL DE CONCLUSÃO ===== -->
+  <div class="modal-overlay" id="modalConclusao" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal__icon">🎉</div>
+      <h2 class="modal__title" id="modalTitle">Módulo concluído!</h2>
+      <p class="modal__text" id="modalText">Você visualizou todos os slides deste módulo.</p>
+      <div class="modal__actions">
+        <a href="#" class="btn btn--primary" id="modalProximo">
+          Próximo módulo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#" class="btn btn--ghost" id="modalVoltar">Ver todos os módulos</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/slides.js"></script>
+</body>
+</html>

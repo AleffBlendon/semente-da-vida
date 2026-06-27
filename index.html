@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semente da Vida — Educação Preventiva</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body class="page-home">
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo-link">
+        <img src="image/logo.png" alt="Instituto Semente da Vida" class="header__logo" />
+      </a>
+      <nav class="header__nav" id="mainNav">
+        <a href="#sobre" class="nav-link">Sobre</a>
+        <a href="#faixas" class="nav-link">Módulos</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <div class="hero__tag">🌱 Educação Preventiva</div>
+        <h1 class="hero__title">
+          Aprender a se<br />
+          <span class="hero__title--highlight">proteger</span><br />
+          começa aqui.
+        </h1>
+        <p class="hero__desc">
+          Conteúdos educativos sobre proteção pessoal, limites e segurança —
+          desenvolvidos especialmente para jovens de 11 a 17 anos.
+        </p>
+        <a href="#faixas" class="btn btn-primary btn-lg">
+          Escolher minha faixa etária
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="hero__visual" aria-hidden="true">
+        <div class="hero__orb hero__orb--1"></div>
+        <div class="hero__orb hero__orb--2"></div>
+        <div class="hero__orb hero__orb--3"></div>
+        <div class="hero__card hero__card--1">
+          <span class="hero__card-icon">🛡️</span>
+          <span>Proteção pessoal</span>
+        </div>
+        <div class="hero__card hero__card--2">
+          <span class="hero__card-icon">💬</span>
+          <span>Diálogo seguro</span>
+        </div>
+        <div class="hero__card hero__card--3">
+          <span class="hero__card-icon">🌟</span>
+          <span>Autoconfiança</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SOBRE ===== -->
+  <section class="about" id="sobre">
+    <div class="container about__inner">
+      <div class="section-badge">Sobre o programa</div>
+      <h2 class="section-title" style="text-align:center">O que é o Semente da Vida?</h2>
+      <p class="section-desc" style="text-align:center;margin:0 auto 0">
+        O Instituto Semente da Vida desenvolve programas educativos para promover
+        uma infância e adolescência seguras. Nossos módulos foram criados para serem
+        acessados em escolas, famílias e comunidades.
+      </p>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar__icon-wrap">🛡️</div>
+          <h3 class="pillar__title">Proteção</h3>
+          <p class="pillar__text">Ensinamos limites corporais e emocionais de forma clara e positiva.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar__icon-wrap">💬</div>
+          <h3 class="pillar__title">Diálogo</h3>
+          <p class="pillar__text">Incentivamos a comunicação aberta com adultos de confiança.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar__icon-wrap">🌟</div>
+          <h3 class="pillar__title">Autoestima</h3>
+          <p class="pillar__text">Fortalecemos a autoconfiança e o senso de pertencimento.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar__icon-wrap">📚</div>
+          <h3 class="pillar__title">Conhecimento</h3>
+          <p class="pillar__text">Conteúdo baseado em evidências, adaptado por faixa etária.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SELEÇÃO DE FAIXA ===== -->
+  <section class="age-section" id="faixas">
+    <div class="container">
+      <div class="section-badge section-badge--wine">Comece agora</div>
+      <h2 class="section-title">Qual é a sua faixa etária?</h2>
+      <p class="section-desc">Cada trilha tem linguagem e conteúdo pensados especialmente para cada fase da vida.</p>
+      <div class="age-grid">
+
+        <!-- 11-14 anos -->
+        <a href="modulos.html?faixa=11-14" class="age-card" data-faixa="11-14">
+          <div class="age-card__top">
+            <div class="age-card__emoji">🌱</div>
+            <div class="age-card__modules-badge">6 módulos</div>
+          </div>
+          <div class="age-card__range">11 – 14 anos</div>
+          <div class="age-card__label">Pré-adolescência</div>
+          <p class="age-card__desc">Introdução a limites pessoais, privacidade e relações seguras.</p>
+          <div class="age-card__cta">
+            Acessar módulos
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- 15-17 anos -->
+        <a href="modulos.html?faixa=15-17" class="age-card age-card--alt" data-faixa="15-17">
+          <div class="age-card__top">
+            <div class="age-card__emoji">🌳</div>
+            <div class="age-card__modules-badge">6 módulos</div>
+          </div>
+          <div class="age-card__range">15 – 17 anos</div>
+          <div class="age-card__label">Adolescência</div>
+          <p class="age-card__desc">Aprofundamento em relações, consentimento e proteção em ambientes digitais.</p>
+          <div class="age-card__cta">
+            Acessar módulos
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <img src="image/logo-footer.png" alt="Semente da Vida" class="footer__logo" />
+      <p class="footer__copy"> Desde 2013, semeando esperança e equidade, transformando vidas e construindo futuros.</p>
+      <p class="footer__tagline">O Instituto Semente da Vida fica na: Rua Bocaína, 327 – Jardim América IV, Várzea Paulista – SP, 13222-420
+(11)2449-8810 | (11)97558-5278</p>
+    </div>
+  </footer>
+
+  <script src="js/home.js"></script>
+</body>
+</html>
