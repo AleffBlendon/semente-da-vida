@@ -524,8 +524,7 @@ ul  { list-style: none; }
   font-size: 1rem;
   font-weight: 800;
   color: var(--wine);
-  flex-grow: 1;
-  margin-top: auto;
+  margin-top: 8px;
   transition: var(--transition);
 }
 .age-card:hover .age-card__cta {
