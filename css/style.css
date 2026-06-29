@@ -872,7 +872,7 @@ ul  { list-style: none; }
 
   /* Age section */
   .age-section { padding: 72px 0; }
-  .age-grid    { grid-template-columns: repeat(2, 1fr); max-width: 100%; gap: 20px; }
+  .age-grid    { grid-template-columns: 1fr; max-width: 100%; gap: 20px; }
   .age-card    { padding: 36px 28px; }
   .age-card__emoji { font-size: 3rem; }
   .age-card__range { font-size: 1.6rem; }
