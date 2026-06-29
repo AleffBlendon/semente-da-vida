@@ -203,39 +203,50 @@
 @keyframes enterRight { from { opacity: 0; transform: translateX( 36px); } to { opacity: 1; transform: translateX(0); } }
 
 /* ── 10. Setas laterais ───────────────────────────────────── */
-/* Visíveis permanentemente no desktop (opacity .7), lift no hover */
+/* ── 10. Setas laterais ───────────────────────────────────── */
+/* Container externo: flex row com setas nos lados e imagem no centro */
+.slide-image-outer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* A imagem expande para preencher o espaço entre as setas */
+.slide-image-outer .slide-image-wrap {
+  flex: 1;
+  min-width: 0; /* impede overflow em flex */
+}
+
+/* Setas: agora fora da imagem, sem position absolute */
 .slide-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  flex-shrink: 0;
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: rgba(0,0,0,.5);
-  border: 2px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.12);
+  border: 2px solid rgba(255,255,255,.25);
   color: #fff;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: .7;                        /* sempre visíveis */
+  opacity: .85;
   transition: opacity .2s ease, background .2s ease, transform .2s ease, border-color .2s ease;
-  z-index: 10;
-  backdrop-filter: blur(6px);
 }
 .slide-arrow:hover {
   opacity: 1;
-  background: rgba(0,0,0,.78);
-  border-color: rgba(255,255,255,.45);
-  transform: translateY(-50%) scale(1.08);
+  background: rgba(255,255,255,.22);
+  border-color: rgba(255,255,255,.5);
+  transform: scale(1.08);
 }
 .slide-arrow:disabled {
-  opacity: 0 !important;
+  opacity: .2 !important;
   pointer-events: none;
 }
 
-.slide-arrow--prev { left: 16px; }
-.slide-arrow--next { right: 16px; }
+.slide-arrow--prev { }
+.slide-arrow--next { }
 
 /* ── 11. Controles inferiores ─────────────────────────────── */
 .slides-controls {
@@ -373,6 +384,8 @@
 
   /* Setas: ocultas no mobile (usa swipe) */
   .slide-arrow { display: none; }
+  /* Sem setas, o outer vira coluna simples */
+  .slide-image-outer { gap: 0; }
 
   /* Botões */
   .page-slides .btn--secondary,

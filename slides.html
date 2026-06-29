@@ -66,27 +66,34 @@
     <!-- Visualizador de slides -->
     <div class="slides-viewer" id="slidesViewer" hidden>
 
-      <!-- Imagem do slide atual -->
-      <div class="slide-image-wrap" id="slideImageWrap">
-        <img
-          src=""
-          alt="Slide"
-          class="slide-image"
-          id="slideImage"
-          draggable="false"
-        />
+      <!-- Imagem + setas laterais -->
+      <div class="slide-image-outer">
 
-        <!-- Setas laterais (desktop) -->
+        <!-- Seta esquerda (fora da imagem) -->
         <button class="slide-arrow slide-arrow--prev" id="arrowPrev" aria-label="Slide anterior">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M15 18l-6-6 6-6"/>
           </svg>
         </button>
+
+        <!-- Imagem do slide atual -->
+        <div class="slide-image-wrap" id="slideImageWrap">
+          <img
+            src=""
+            alt="Slide"
+            class="slide-image"
+            id="slideImage"
+            draggable="false"
+          />
+        </div>
+
+        <!-- Seta direita (fora da imagem) -->
         <button class="slide-arrow slide-arrow--next" id="arrowNext" aria-label="Próximo slide">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M9 18l6-6-6-6"/>
           </svg>
         </button>
+
       </div>
 
       <!-- Controles inferiores -->

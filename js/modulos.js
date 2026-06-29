@@ -9,8 +9,22 @@
 
   /* ── Configuração das faixas etárias ── */
   const FAIXAS = {
-    '11-14': {
+    '3-6': {
       emoji:  '🌱',
+      titulo: '3 – 6 anos',
+      label:  'Primeira Infância',
+      sub:    'Vamos aprender sobre o nosso corpo, toques bons e ruins, e em quem podemos confiar!',
+      cor:    '#E07B39',
+    },
+    '7-10': {
+      emoji:  '🌿',
+      titulo: '7 – 10 anos',
+      label:  'Infância',
+      sub:    'Aprenda sobre seus limites, como reconhecer situações ruins e pedir ajuda quando precisar.',
+      cor:    '#2A9D8F',
+    },
+    '11-14': {
+      emoji:  '🌲',
       titulo: '11 – 14 anos',
       label:  'Pré-adolescência',
       sub:    'Conteúdos sobre limites pessoais, privacidade e relações seguras.',
@@ -25,39 +39,39 @@
     },
   };
 
-  /* ── Títulos e descrições de cada módulo ── */
-  const MODULOS_INFO = [
-    {
-      titulo: 'Módulo 1 — Quem sou eu?',
-      desc:   'Autoconhecimento, identidade e valorização pessoal.',
-      icone:  '🪞',
-    },
-    {
-      titulo: 'Módulo 2 — Meu corpo é meu',
-      desc:   'Limites corporais, privacidade e respeito ao próprio corpo.',
-      icone:  '🛡️',
-    },
-    {
-      titulo: 'Módulo 3 — Relações seguras',
-      desc:   'Como identificar relações saudáveis e reconhecer situações de risco.',
-      icone:  '🤝',
-    },
-    {
-      titulo: 'Módulo 4 — Falar é proteger',
-      desc:   'A importância de se comunicar com adultos de confiança.',
-      icone:  '💬',
-    },
-    {
-      titulo: 'Módulo 5 — Segurança digital',
-      desc:   'Proteção nas redes sociais, privacidade online e uso seguro da internet.',
-      icone:  '🔒',
-    },
-    {
-      titulo: 'Módulo 6 — Eu posso ajudar',
-      desc:   'Como apoiar colegas e buscar ajuda em situações difíceis.',
-      icone:  '🌟',
-    },
-  ];
+  /* ── Títulos e descrições de cada módulo — variam por faixa etária ── */
+  const MODULOS_POR_FAIXA = {
+
+    // 3–6 anos: linguagem simples, frases curtas, foco no concreto
+    '3-6': [
+      { titulo: 'Módulo 1 — Quem sou eu?',        desc: 'Meu nome, meu corpo e o que me faz especial!',                        icone: '🪞' },
+      { titulo: 'Módulo 2 — Meu corpo é meu',      desc: 'Aprendo que meu corpo é meu e ninguém pode tocá-lo sem minha permissão.', icone: '🛡️' },
+      { titulo: 'Módulo 3 — Toques bons e ruins',  desc: 'Existem toques que fazem bem e toques que não são certos.',            icone: '🤲' },
+      { titulo: 'Módulo 4 — Pode contar!',          desc: 'Quando algo me deixa triste ou com medo, posso contar para um adulto.', icone: '💬' },
+      { titulo: 'Módulo 5 — Pessoas de confiança', desc: 'Quem são os adultos que me ajudam e me protegem?',                    icone: '🤝' },
+      { titulo: 'Módulo 6 — Me sinto seguro!',     desc: 'Eu sei me proteger e sei pedir ajuda. Muito bem!',                    icone: '🌟' },
+    ],
+
+    // 7–10 anos: um pouco mais elaborado, mas ainda direto e acolhedor
+    '7-10': [
+      { titulo: 'Módulo 1 — Quem sou eu?',          desc: 'Conhecer a si mesmo é o primeiro passo para se cuidar.',             icone: '🪞' },
+      { titulo: 'Módulo 2 — Meu corpo é meu',        desc: 'Entender os limites do meu corpo e respeitar o dos outros.',         icone: '🛡️' },
+      { titulo: 'Módulo 3 — Segredos e mentiras',    desc: 'Aprendo a diferença entre segredos bons e segredos ruins.',          icone: '🤔' },
+      { titulo: 'Módulo 4 — Falar protege',          desc: 'Contar para um adulto de confiança é sempre a escolha certa.',       icone: '💬' },
+      { titulo: 'Módulo 5 — Quando não me sinto bem',desc: 'Reconheço situações que me deixam desconfortável e sei o que fazer.',icone: '🔒' },
+      { titulo: 'Módulo 6 — Posso ajudar!',          desc: 'Se um amigo precisar, eu sei como apoiar e onde buscar ajuda.',      icone: '🌟' },
+    ],
+
+    // 11–14 e 15–17: textos originais mantidos
+    'default': [
+      { titulo: 'Módulo 1 — Quem sou eu?',        desc: 'Autoconhecimento, identidade e valorização pessoal.',                          icone: '🪞' },
+      { titulo: 'Módulo 2 — Meu corpo é meu',      desc: 'Limites corporais, privacidade e respeito ao próprio corpo.',                  icone: '🛡️' },
+      { titulo: 'Módulo 3 — Relações seguras',     desc: 'Como identificar relações saudáveis e reconhecer situações de risco.',         icone: '🤝' },
+      { titulo: 'Módulo 4 — Falar é proteger',     desc: 'A importância de se comunicar com adultos de confiança.',                     icone: '💬' },
+      { titulo: 'Módulo 5 — Segurança digital',    desc: 'Proteção nas redes sociais, privacidade online e uso seguro da internet.',     icone: '🔒' },
+      { titulo: 'Módulo 6 — Eu posso ajudar',      desc: 'Como apoiar colegas e buscar ajuda em situações difíceis.',                   icone: '🌟' },
+    ],
+  };
 
   /* ── Lê o parâmetro ?faixa= da URL ── */
   function getFaixa() {
@@ -116,7 +130,17 @@
 
     grid.innerHTML = '';
 
-    MODULOS_INFO.forEach((mod, idx) => {
+    // Usa textos específicos da faixa se existirem, senão usa os padrão
+    const modulos = MODULOS_POR_FAIXA[faixa] || MODULOS_POR_FAIXA['default'];
+
+    // Texto do botão CTA adaptado por faixa
+    const ctaTexto = {
+      '3-6':  { inicio: 'Vamos lá! 🎉', continua: 'Continuar 👉', rever: 'Ver de novo 🔁' },
+      '7-10': { inicio: 'Começar',       continua: 'Continuar',    rever: 'Rever módulo'   },
+    };
+    const cta = ctaTexto[faixa] || { inicio: 'Começar', continua: 'Continuar', rever: 'Rever módulo' };
+
+    modulos.forEach((mod, idx) => {
       const num      = idx + 1;
       const progress = getProgress(faixa, num);
 
@@ -146,7 +170,7 @@
         ${progressBar}
         <div class="module-card__footer">
           <span class="module-card__cta">
-            ${completed ? 'Rever módulo' : (started ? 'Continuar' : 'Começar')}
+            ${completed ? cta.rever : (started ? cta.continua : cta.inicio)}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>

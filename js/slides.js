@@ -2,14 +2,16 @@
  * slides.js — Visualizador de slides por imagem JPG
  * Semente da Vida
  *
- * URL esperada: slides.html?faixa=11-14&modulo=1
+ * URL esperada: slides.html?faixa=3-6&modulo=1
+ *               slides.html?faixa=7-10&modulo=1
+ *               slides.html?faixa=11-14&modulo=1
+ *               slides.html?faixa=15-17&modulo=1
  *
  * Estrutura real dos arquivos:
- *   image/11~14 anos/Semente_da_Vida_11-14_Modulo-1/1.jpg
- *   image/11~14 anos/Semente_da_Vida_11-14_Modulo-1/2.jpg
- *   ...
- *   image/15~17 anos/Semente_da_Vida_15-17_Modulo-1/1.jpg
- *   ...
+ *   image/03~06 anos/Semente_da_Vida_3-6_Modulo-1/1.jpg  ... 12.jpg
+ *   image/07~10 anos/Semente_da_Vida_7-10_Modulo-1/1.jpg ... 12.jpg
+ *   image/11~14 anos/Semente_da_Vida_11-14_Modulo-1/1.jpg ... 12.jpg
+ *   image/15~17 anos/Semente_da_Vida_15-17_Modulo-1/1.jpg ... 12.jpg
  */
 
 (function () {
@@ -20,18 +22,28 @@
      Cada entrada tem a pasta e o prefixo dos arquivos.
   ════════════════════════════════════════════════ */
   const FAIXAS = {
+    '3-6': {
+      label:    '3 – 6 anos',
+      cor:      '#E07B39',
+      pasta:    'image/03~06 anos',
+      subpasta: 'Semente_da_Vida_3-6_Modulo-{N}',
+    },
+    '7-10': {
+      label:    '7 – 10 anos',
+      cor:      '#2A9D8F',
+      pasta:    'image/07~10 anos',
+      subpasta: 'Semente_da_Vida_7-10_Modulo-{N}',
+    },
     '11-14': {
-      label:  '11 – 14 anos',
-      cor:    '#8B1E2D',
-      // Pasta base relativa ao index.html
-      pasta:  'image/11~14 anos',
-      // Nome da subpasta de cada módulo (substitui {N} pelo número)
+      label:    '11 – 14 anos',
+      cor:      '#8B1E2D',
+      pasta:    'image/11~14 anos',
       subpasta: 'Semente_da_Vida_11-14_Modulo-{N}',
     },
     '15-17': {
-      label:  '15 – 17 anos',
-      cor:    '#5B2C6F',
-      pasta:  'image/15~17 anos',
+      label:    '15 – 17 anos',
+      cor:      '#5B2C6F',
+      pasta:    'image/15~17 anos',
       subpasta: 'Semente_da_Vida_15-17_Modulo-{N}',
     },
   };
@@ -44,6 +56,35 @@
     'Módulo 5 — Segurança digital',
     'Módulo 6 — Eu posso ajudar',
   ];
+
+  // Textos dos botões de navegação adaptados por faixa
+  // Para crianças menores: palavras mais simples e acolhedoras
+  const TEXTOS_NAV = {
+    '3-6': {
+      proximo:  'Próximo ➡️',
+      voltar:   '⬅️ Voltar',
+      concluir: 'Terminei! 🎉',
+      modalTitulo: 'Muito bem! 🌟',
+      modalCta:    'Próxima história',
+      modalVoltar: 'Ver todos',
+    },
+    '7-10': {
+      proximo:  'Próximo',
+      voltar:   'Voltar',
+      concluir: 'Concluir ✅',
+      modalTitulo: 'Parabéns! 🎉',
+      modalCta:    'Próximo módulo',
+      modalVoltar: 'Ver módulos',
+    },
+    'default': {
+      proximo:  'Próximo',
+      voltar:   'Voltar',
+      concluir: 'Concluir',
+      modalTitulo: 'Módulo concluído!',
+      modalCta:    'Próximo módulo',
+      modalVoltar: 'Ver todos os módulos',
+    },
+  };
 
   // Número total de slides por módulo (todos têm 12)
   const TOTAL_SLIDES = 12;
@@ -152,6 +193,10 @@
     DOM.btnVoltarTop.href          = voltar;
     DOM.progressBar.style.background = f.cor;
     document.title = `${titulo} — Semente da Vida`;
+
+    // Atualiza texto do botão "Voltar" no header para crianças menores
+    const nav = TEXTOS_NAV[state.faixa] || TEXTOS_NAV['default'];
+    DOM.btnVoltarTop.childNodes.forEach(n => { if (n.nodeType === 3) n.textContent = ' Módulos'; });
   }
 
   /* ════════════════════════════════════════════════
@@ -177,6 +222,7 @@
   function updateUI() {
     const cur   = state.atual + 1;
     const total = state.slides.length;
+    const nav   = TEXTOS_NAV[state.faixa] || TEXTOS_NAV['default'];
 
     DOM.slideAtual.textContent  = cur;
     DOM.slideTotal.textContent  = total;
@@ -185,14 +231,17 @@
     DOM.btnPrev.disabled   = state.atual === 0;
     DOM.arrowPrev.disabled = state.atual === 0;
 
+    // Texto do botão Voltar
+    DOM.btnPrev.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> ${nav.voltar}`;
+
     const isLast = state.atual === total - 1;
     if (isLast) {
-      DOM.btnNext.innerHTML = `Concluir <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>`;
+      DOM.btnNext.innerHTML = `${nav.concluir} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>`;
     } else {
-      DOM.btnNext.innerHTML = `Próximo <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+      DOM.btnNext.innerHTML = `${nav.proximo} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
     }
 
-    // Atualiza dots
+    // Dots
     DOM.dots.querySelectorAll('.slides-dot').forEach((dot, idx) => {
       dot.classList.toggle('slides-dot--active', idx === state.atual);
     });
@@ -310,19 +359,27 @@
 
     const titulo     = MODULOS_TITULOS[state.modulo - 1];
     const proximoMod = state.modulo < 6 ? state.modulo + 1 : null;
+    const nav        = TEXTOS_NAV[state.faixa] || TEXTOS_NAV['default'];
 
-    DOM.modalText.textContent = `Você visualizou todos os ${state.slides.length} slides do ${titulo}.`;
+    // Título e texto do modal adaptados por faixa
+    const modalTituloEl = document.getElementById('modalTitle');
+    if (modalTituloEl) modalTituloEl.textContent = nav.modalTitulo;
+
+    DOM.modalText.textContent = state.faixa === '3-6'
+      ? `Você viu todos os slides! Arrasou! 🌟`
+      : `Você visualizou todos os ${state.slides.length} slides do ${titulo}.`;
 
     if (proximoMod) {
-      DOM.modalProximo.href        = `slides.html?faixa=${state.faixa}&modulo=${proximoMod}`;
-      DOM.modalProximo.innerHTML   = `Módulo ${proximoMod} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+      DOM.modalProximo.href      = `slides.html?faixa=${state.faixa}&modulo=${proximoMod}`;
+      DOM.modalProximo.innerHTML = `${nav.modalCta} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
       DOM.modalProximo.style.display = '';
     } else {
       DOM.modalProximo.style.display = 'none';
     }
 
-    DOM.modalVoltar.href  = `modulos.html?faixa=${state.faixa}`;
-    DOM.modalConcl.hidden = false;
+    DOM.modalVoltar.textContent = nav.modalVoltar;
+    DOM.modalVoltar.href        = `modulos.html?faixa=${state.faixa}`;
+    DOM.modalConcl.hidden       = false;
   }
 
   /* ════════════════════════════════════════════════

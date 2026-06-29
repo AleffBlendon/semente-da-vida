@@ -72,7 +72,7 @@ ul  { list-style: none; }
 .btn-primary {
   background: var(--wine);
   color: var(--white);
-  border-color: var(--wine-dark);
+  border-color: var(--wine);
 }
 .btn--primary:hover,
 .btn-primary:hover {
@@ -324,7 +324,7 @@ ul  { list-style: none; }
 .hero__card-icon { font-size: 2.4rem; }
 .hero__card--1 { top: 40px;  left: 30px;  animation: heroFloat 3.8s ease-in-out infinite; }
 .hero__card--2 { top: 180px; right: 10px; animation: heroFloat 4.3s ease-in-out .5s infinite; }
-.hero__card--3 { bottom: 60px; left: 60px; animation: heroFloat 3.6s ease-in-out 1s infinite; }
+.hero__card--3 { bottom: 35px; left: 40px; animation: heroFloat 3.6s ease-in-out 1s infinite; }
 
 @keyframes heroFloat {
   0%, 100% { transform: translateY(0); }
@@ -433,11 +433,11 @@ ul  { list-style: none; }
 
 .age-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
   margin-top: 56px;
   width: 100%;
-  max-width: 860px;
+  max-width: 1100px;
 }
 
 /* Card de faixa etária */
@@ -464,6 +464,16 @@ ul  { list-style: none; }
 }
 .age-card--alt .age-card__cta { color: var(--green); }
 .age-card--alt .age-card__modules-badge { background: var(--green-light); color: var(--green); }
+
+/* 3-6 anos — laranja caloroso */
+.age-card--3-6 { border-top-color: #E07B39; }
+.age-card--3-6 .age-card__cta { color: #E07B39; }
+.age-card--3-6 .age-card__modules-badge { background: #FEF0E7; color: #E07B39; }
+
+/* 7-10 anos — verde-teal */
+.age-card--7-10 { border-top-color: #2A9D8F; }
+.age-card--7-10 .age-card__cta { color: #2A9D8F; }
+.age-card--7-10 .age-card__modules-badge { background: #E6F5F4; color: #2A9D8F; }
 
 .age-card__top {
   display: flex;
@@ -514,7 +524,8 @@ ul  { list-style: none; }
   font-size: 1rem;
   font-weight: 800;
   color: var(--wine);
-  margin-top: 8px;
+  flex-grow: 1;
+  margin-top: auto;
   transition: var(--transition);
 }
 .age-card:hover .age-card__cta {
@@ -862,7 +873,7 @@ ul  { list-style: none; }
 
   /* Age section */
   .age-section { padding: 72px 0; }
-  .age-grid    { grid-template-columns: 1fr; max-width: 480px; gap: 28px; }
+  .age-grid    { grid-template-columns: repeat(2, 1fr); max-width: 100%; gap: 20px; }
   .age-card    { padding: 36px 28px; }
   .age-card__emoji { font-size: 3rem; }
   .age-card__range { font-size: 1.6rem; }
